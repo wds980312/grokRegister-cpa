@@ -31,3 +31,12 @@ token.json
 .vscode/
 DrissionPage/
 autoPortData/
+.local-chrome-profile/
+
+# 本地设计/浏览器验证临时产物
+.superpowers/
+.playwright-cli/
+output/playwright/
+
+# 本地设计/计划文档，不提交
+docs/

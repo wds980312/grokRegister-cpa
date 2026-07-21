@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Grok Register 控制台</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">GROK REGISTER</div>
+          <h1>注册控制台</h1>
+        </div>
+        <div class="topbar-actions">
+          <a id="browserLink" class="browser-link" href="http://127.0.0.1:18082/vnc.html?autoconnect=true&resize=scale" target="_blank" rel="noreferrer">打开浏览器画面</a>
+          <div class="service-state"><span class="status-dot"></span>本机服务在线</div>
+        </div>
+      </header>
+
+      <section class="workspace" aria-label="注册控制台">
+        <aside class="control-panel">
+          <div class="panel-heading">
+            <span class="eyebrow">TASK CONTROL</span>
+            <span id="providerLabel" class="muted">邮箱服务商: -</span>
+          </div>
+
+          <form id="startForm" class="control-form">
+            <label for="countInput">本次注册数量</label>
+            <div class="number-wrap">
+              <input id="countInput" name="count" type="number" min="1" step="1" inputmode="numeric" value="1" required>
+              <span>个</span>
+            </div>
+            <label for="browserBackend">浏览器环境</label>
+            <select id="browserBackend" name="browser_backend">
+              <option value="bitbrowser">BitBrowser 指纹环境</option>
+              <option value="local_chrome">本地 Chrome 无痕</option>
+              <option value="chromium">Docker Chromium</option>
+            </select>
+            <p id="localChromeHint" class="muted local-chrome-hint" hidden>本地无痕：本机先运行 <code>./start-local-chrome-agent.sh</code> 并保持；点开始会自动拉起 Chrome（需带 remote-allow-origins）。</p>
+            <button id="startButton" class="button button-primary" type="submit"><span aria-hidden="true">▶</span>开始注册</button>
+            <button id="stopButton" class="button button-secondary" type="button" disabled><span aria-hidden="true">■</span>停止任务</button>
+            <p id="actionMessage" class="action-message" role="status" aria-live="polite"></p>
+          </form>
+
+          <div class="control-divider"></div>
+          <div class="side-meta">
+            <div><span>默认数量</span><strong id="defaultCount">-</strong></div>
+            <div><span>访问范围</span><strong>仅本机</strong></div>
+          </div>
+        </aside>
+
+        <section class="monitor-panel">
+          <header class="monitor-header">
+            <div>
+              <span class="eyebrow">LIVE MONITOR</span>
+              <h2 id="stateLabel">空闲</h2>
+            </div>
+            <div class="metrics" aria-label="任务统计">
+              <div class="metric"><span>成功</span><strong id="successCount">0</strong></div>
+              <div class="metric"><span>失败</span><strong id="failedCount">0</strong></div>
+            </div>
+          </header>
+
+          <div class="log-frame">
+            <div class="log-toolbar">
+              <span>运行日志</span>
+              <div class="log-actions">
+                <span id="logHint">等待任务</span>
+                <button id="copyLogsButton" class="log-copy" type="button">复制日志</button>
+              </div>
+            </div>
+            <pre id="logOutput" aria-live="polite">等待启动...</pre>
+          </div>
+        </section>
+      </section>
+    </main>
+    <script src="/static/app.js"></script>
+  </body>
+</html>
